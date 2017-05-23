@@ -44,7 +44,7 @@ type NotificationRequest struct {
 
 	Contents         map[string]string `json:"contents,omitempty"`
 	Headings         map[string]string `json:"headings,omitempty"`
-	SubTitle         map[string]string `json:"subTitle,omitempty"`
+	SubTitle         map[string]string `json:"subtitle,omitempty"`
 	TemplateID       string            `json:"template_id,omitempty"`
 	ContentAvailable bool              `json:"content_available,omitempty"`
 	MutableContent   bool              `json:"mutable_content,omitempty"`
