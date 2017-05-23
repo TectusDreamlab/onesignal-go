@@ -25,8 +25,8 @@ func setup() {
 
 	// create a client, giving it the test server URL
 	client = NewClient(nil)
-	client.AppKey = "fake-app-key"
-	client.UserKey = "fake-user-key"
+	client.AppKey = "fake app key"
+	client.UserKey = "fake user key"
 	url, _ := url.Parse(server.URL)
 	client.BaseURL = url
 }
@@ -138,10 +138,9 @@ func TestNewRequest_userKeyType(t *testing.T) {
 func TestNewRequest_invalidJSON(t *testing.T) {
 	c := NewClient(nil)
 
-	type T struct {
-		A map[int]interface{}
-	}
-	_, err := c.NewRequest("GET", "/", &T{}, APP)
+	type F func()
+	var f F
+	_, err := c.NewRequest("GET", "/", f, APP)
 
 	if err == nil {
 		t.Error("Expected error to be returned.")

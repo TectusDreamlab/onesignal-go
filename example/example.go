@@ -5,8 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
-	"github.com/tbalthazar/onesignal-go"
+	onesignal "github.com/TectusDreamlab/onesignal-go"
 )
 
 var (
@@ -271,13 +270,22 @@ func GetNotifications(notificationID string, client *onesignal.Client) *onesigna
 
 func CreateNotifications(client *onesignal.Client) string {
 	fmt.Println("### CreateNotifications ###")
-	playerID := "6c54762c-4daa-4166-8aa4-1c7f0b1ad78b" // valid
-	// playerID := "83823c5f-53ce-4e35-be6a-a3f27e5d838f" // invalid
+
 	notificationReq := &onesignal.NotificationRequest{
-		AppID:            appID,
-		Contents:         map[string]string{"en": "English message"},
+		AppID: appID,
+		// Contents:         map[string]string{"en": "Test Message"},
+		// Headings:         map[string]string{"en": "Test Heading"},
+		// SubTitle:         map[string]string{"en": "Test SubTitle"},
 		IsIOS:            true,
-		IncludePlayerIDs: []string{playerID},
+		ContentAvailable: true,
+		Filters: []onesignal.Filter{
+			onesignal.Filter{
+				Field:    "tag",
+				Key:      "email",
+				Value:    "wyd1xwuaYezb0F4pvz5P4DgyZPwd6VGPP0P27qrFGiw=",
+				Relation: "=",
+			},
+		},
 	}
 
 	createRes, res, err := client.Notifications.Create(notificationReq)
@@ -323,10 +331,6 @@ func DeleteNotifications(notificationID string, client *onesignal.Client) {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 	appID = os.Getenv("ONESIGNAL_APP_ID")
 	appKey = os.Getenv("ONESIGNAL_API_KEY")
 	userKey = os.Getenv("ONESIGNAL_USER_AUTH_KEY")
@@ -358,9 +362,9 @@ func main() {
 	// notifications
 	// notif := ListNotifications(client)[0]
 	// GetNotifications(notif.ID, client)
-	notifID := CreateNotifications(client)
+	CreateNotifications(client)
 	// GetNotifications(notifID, client)
 	// UpdateNotifications(notifID, client)
 	// GetNotifications(notifID, client)
-	DeleteNotifications(notifID, client)
+	// DeleteNotifications(notifID, client)
 }

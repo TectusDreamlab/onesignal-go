@@ -28,66 +28,93 @@ type Notification struct {
 	Contents   map[string]string `json:"contents"`
 }
 
+// Filter defines a filter
+type Filter struct {
+	Field    string `json:"field"`
+	Key      string `json:"key"`
+	Relation string `json:"relation"`
+	Value    string `json:"value"`
+}
+
 // NotificationRequest represents a request to create a notification.
 type NotificationRequest struct {
-	AppID                  string            `json:"app_id"`
-	Contents               map[string]string `json:"contents,omitempty"`
-	Headings               map[string]string `json:"headings,omitempty"`
-	IsIOS                  bool              `json:"isIos,omitempty"`
-	IsAndroid              bool              `json:"isAndroid,omitempty"`
-	IsWP                   bool              `json:"isWP,omitempty"`
-	IsADM                  bool              `json:"isAdm,omitempty"`
-	IsChrome               bool              `json:"isChrome,omitempty"`
-	IsChromeWeb            bool              `json:"isChromeWeb,omitempty"`
-	IsSafari               bool              `json:"isSafari,omitempty"`
-	IsAnyWeb               bool              `json:"isAnyWeb,omitempty"`
-	IncludedSegments       []string          `json:"included_segments,omitempty"`
-	ExcludedSegments       []string          `json:"excluded_segments,omitempty"`
-	IncludePlayerIDs       []string          `json:"include_player_ids,omitempty"`
-	IncludeIOSTokens       []string          `json:"include_ios_tokens,omitempty"`
-	IncludeAndroidRegIDs   []string          `json:"include_android_reg_ids,omitempty"`
-	IncludeWPURIs          []string          `json:"include_wp_uris,omitempty"`
-	IncludeWPWNSURIs       []string          `json:"include_wp_wns_uris,omitempty"`
-	IncludeAmazonRegIDs    []string          `json:"include_amazon_reg_ids,omitempty"`
-	IncludeChromeRegIDs    []string          `json:"include_chrome_reg_ids,omitempty"`
-	IncludeChromeWebRegIDs []string          `json:"include_chrome_web_reg_ids,omitempty"`
-	AppIDs                 []string          `json:"app_ids,omitempty"`
-	Tags                   interface{}       `json:"tags,omitempty"`
-	IOSBadgeType           string            `json:"ios_badgeType,omitempty"`
-	IOSBadgeCount          int               `json:"ios_badgeCount,omitempty"`
-	IOSSound               string            `json:"ios_sound,omitempty"`
-	AndroidSound           string            `json:"android_sound,omitempty"`
-	ADMSound               string            `json:"adm_sound,omitempty"`
-	WPSound                string            `json:"wp_sound,omitempty"`
-	WPWNSSound             string            `json:"wp_wns_sound,omitempty"`
-	Data                   interface{}       `json:"data,omitempty"`
-	Buttons                interface{}       `json:"buttons,omitempty"`
-	SmallIcon              string            `json:"small_icon,omitempty"`
-	LargeIcon              string            `json:"large_icon,omitempty"`
-	BigPicture             string            `json:"big_picture,omitempty"`
-	ADMSmallIcon           string            `json:"adm_small_icon,omitempty"`
-	ADMLargeIcon           string            `json:"adm_large_icon,omitempty"`
-	ADMBigPicture          string            `json:"adm_big_picture,omitempty"`
-	ChromeIcon             string            `json:"chrome_icon,omitempty"`
-	ChromeBigPicture       string            `json:"chrome_big_picture,omitempty"`
-	ChromeWebIcon          string            `json:"chrome_web_icon,omitempty"`
-	FirefoxIcon            string            `json:"firefox_icon,omitempty"`
-	URL                    string            `json:"url,omitempty"`
-	SendAfter              string            `json:"send_after,omitempty"`
-	DelayedOption          string            `json:"delayed_option,omitempty"`
-	DeliveryTimeOfDay      string            `json:"delivery_time_of_day,omitempty"`
-	AndroidLEDColor        string            `json:"android_led_color,omitempty"`
-	AndroidAccentColor     string            `json:"android_accent_color,omitempty"`
-	AndroidVisibility      int               `json:"android_visibility,omitempty"`
-	ContentAvailable       bool              `json:"content_available,omitempty"`
-	AndroidBackgroundData  bool              `json:"android_background_data,omitempty"`
-	AmazonBackgroundData   bool              `json:"amazon_background_data,omitempty"`
-	TemplateID             string            `json:"template_id,omitempty"`
-	AndroidGroup           string            `json:"android_group,omitempty"`
-	AndroidGroupMessage    interface{}       `json:"android_group_message,omitempty"`
-	ADMGroup               string            `json:"adm_group,omitempty"`
-	ADMGroupMessage        interface{}       `json:"adm_group_message,omitempty"`
-	Filters                interface{}       `json:"filters,omitempty"`
+	AppID  string   `json:"app_id"`
+	AppIDs []string `json:"app_ids,omitempty"`
+
+	Contents         map[string]string `json:"contents,omitempty"`
+	Headings         map[string]string `json:"headings,omitempty"`
+	SubTitle         map[string]string `json:"subTitle,omitempty"`
+	TemplateID       string            `json:"template_id,omitempty"`
+	ContentAvailable bool              `json:"content_available,omitempty"`
+	MutableContent   bool              `json:"mutable_content,omitempty"`
+
+	Data             interface{} `json:"data,omitempty"`
+	URL              string      `json:"url,omitempty"`
+	IOSAttachments   interface{} `json:"ios_attachments,omitempty"`
+	BigPicture       string      `json:"big_picture,omitempty"`
+	ADMBigPicture    string      `json:"adm_big_picture,omitempty"`
+	ChromeBigPicture string      `json:"chrome_big_picture,omitempty"`
+
+	Buttons     interface{} `json:"buttons,omitempty"`
+	WebButtons  interface{} `json:"web_buttons,omitempty"`
+	IOSCategory string      `json:"ios_category,omitempty"`
+
+	AndroidBackgroundLayout interface{} `json:"android_background_layout,omitempty"`
+	SmallIcon               string      `json:"small_icon,omitempty"`
+	LargeIcon               string      `json:"large_icon,omitempty"`
+	ADMSmallIcon            string      `json:"adm_small_icon,omitempty"`
+	ADMLargeIcon            string      `json:"adm_large_icon,omitempty"`
+	ChromeWebIcon           string      `json:"chrome_web_icon,omitempty"`
+	ChromeWebImage          string      `json:"chrome_web_image,omitempty"`
+	FirefoxIcon             string      `json:"firefox_icon,omitempty"`
+	ChromeIcon              string      `json:"chrome_icon,omitempty"`
+	IOSSound                string      `json:"ios_sound,omitempty"`
+	AndroidSound            string      `json:"android_sound,omitempty"`
+	ADMSound                string      `json:"adm_sound,omitempty"`
+	WPSound                 string      `json:"wp_sound,omitempty"`
+	WPWNSSound              string      `json:"wp_wns_sound,omitempty"`
+	AndroidLEDColor         string      `json:"android_led_color,omitempty"`
+	AndroidAccentColor      string      `json:"android_accent_color,omitempty"`
+	AndroidVisibility       int         `json:"android_visibility,omitempty"`
+	IOSBadgeType            string      `json:"ios_badgeType,omitempty"`
+	IOSBadgeCount           int         `json:"ios_badgeCount,omitempty"`
+	CollapseID              string      `json:"collapse_id,omitempty"`
+
+	SendAfter         string `json:"send_after,omitempty"`
+	DelayedOption     string `json:"delayed_option,omitempty"`
+	DeliveryTimeOfDay string `json:"delivery_time_of_day,omitempty"`
+	TTL               int    `json:"ttl,omitempty"`
+	Priority          int    `json:"priority,omitempty"`
+
+	AndroidGroup        string      `json:"android_group,omitempty"`
+	AndroidGroupMessage interface{} `json:"android_group_message,omitempty"`
+	ADMGroup            string      `json:"adm_group,omitempty"`
+	ADMGroupMessage     interface{} `json:"adm_group_message,omitempty"`
+
+	IsIOS       bool `json:"isIos,omitempty"`
+	IsAndroid   bool `json:"isAndroid,omitempty"`
+	IsAnyWeb    bool `json:"isAnyWeb,omitempty"`
+	IsChromeWeb bool `json:"isChromeWeb,omitempty"`
+	IsFirefox   bool `json:"isFireFox,omitempty"`
+	IsSafari    bool `json:"isSafari,omitempty"`
+	IsWP        bool `json:"isWP,omitempty"`
+	IsWPWNS     bool `json:"isWP_WNS,omitempty"`
+	IsADM       bool `json:"isAdm,omitempty"`
+	IsChrome    bool `json:"isChrome,omitempty"`
+
+	IncludedSegments []string `json:"included_segments,omitempty"`
+	ExcludedSegments []string `json:"excluded_segments,omitempty"`
+
+	Filters []Filter `json:"filters,omitempty"`
+
+	IncludePlayerIDs       []string `json:"include_player_ids,omitempty"`
+	IncludeIOSTokens       []string `json:"include_ios_tokens,omitempty"`
+	IncludeWPURIs          []string `json:"include_wp_uris,omitempty"`
+	IncludeWPWNSURIs       []string `json:"include_wp_wns_uris,omitempty"`
+	IncludeAmazonRegIDs    []string `json:"include_amazon_reg_ids,omitempty"`
+	IncludeChromeRegIDs    []string `json:"include_chrome_reg_ids,omitempty"`
+	IncludeChromeWebRegIDs []string `json:"include_chrome_web_reg_ids,omitempty"`
+	IncludeAndroidRegIDs   []string `json:"include_android_reg_ids,omitempty"`
 }
 
 // NotificationCreateResponse wraps the standard http.Response for the
