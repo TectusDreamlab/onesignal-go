@@ -18,6 +18,7 @@ const (
 // AuthKeyType specifies the token used to authentify the requests
 type AuthKeyType uint
 
+// Enums
 const (
 	APP AuthKeyType = iota
 	USER

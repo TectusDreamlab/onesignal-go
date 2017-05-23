@@ -211,7 +211,7 @@ func (s *PlayersService) Create(player *PlayerRequest) (*PlayerCreateResponse, *
 	return plResp, resp, err
 }
 
-// Create a new session for a player.
+// OnSession creates a new session for a player.
 //
 // OneSignal API docs:
 // https://documentation.onesignal.com/docs/playersidon_session
@@ -238,7 +238,7 @@ func (s *PlayersService) OnSession(playerID string, opt *PlayerOnSessionOptions)
 	return plResp, resp, err
 }
 
-// Create a new purchase for a player.
+// OnPurchase creates a new purchase for a player.
 //
 // OneSignal API docs: https://documentation.onesignal.com/docs/on_purchase
 func (s *PlayersService) OnPurchase(playerID string, opt *PlayerOnPurchaseOptions) (*SuccessResponse, *http.Response, error) {
@@ -264,7 +264,7 @@ func (s *PlayersService) OnPurchase(playerID string, opt *PlayerOnPurchaseOption
 	return plResp, resp, err
 }
 
-// Increment the total session length for a player.
+// OnFocus increments the total session length for a player.
 //
 // OneSignal API docs:
 // https://documentation.onesignal.com/docs/playersidon_focus
@@ -291,7 +291,7 @@ func (s *PlayersService) OnFocus(playerID string, opt *PlayerOnFocusOptions) (*S
 	return plResp, resp, err
 }
 
-// Generate a link to download a CSV list of all the players.
+// CSVExport generates a link to download a CSV list of all the players.
 //
 // OneSignal API docs:
 // https://documentation.onesignal.com/docs/players_csv_export
@@ -320,7 +320,7 @@ func (s *PlayersService) CSVExport(opt *PlayerCSVExportOptions) (*PlayerCSVExpor
 	return plResp, resp, err
 }
 
-// Update a player.
+// Update updates a player.
 //
 // OneSignal API docs: https://documentation.onesignal.com/docs/playersid-1
 func (s *PlayersService) Update(playerID string, player *PlayerRequest) (*SuccessResponse, *http.Response, error) {

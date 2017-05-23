@@ -30,10 +30,11 @@ type Notification struct {
 
 // Filter defines a filter
 type Filter struct {
-	Field    string `json:"field"`
-	Key      string `json:"key"`
-	Relation string `json:"relation"`
-	Value    string `json:"value"`
+	Field    string `json:"field,omitempty"`
+	Key      string `json:"key,omitempty"`
+	Relation string `json:"relation,omitempty"`
+	Value    string `json:"value,omitempty"`
+	Operator string `json:"operator,omitempty"`
 }
 
 // NotificationRequest represents a request to create a notification.
@@ -142,7 +143,7 @@ type NotificationListResponse struct {
 	Notifications []Notification
 }
 
-// NotificationUpdateOptions specifies the parameters to the
+// NotificationGetOptions specifies the parameters to the
 // NotificationsService.Get method
 type NotificationGetOptions struct {
 	AppID string `json:"app_id"`

@@ -14,30 +14,33 @@ var (
 	userKey string
 )
 
+// ListApps ...
 func ListApps(client *onesignal.Client) {
 	fmt.Println("### ListApps ###")
 
 	apps, res, err := client.Apps.List()
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- apps:%+v\n", apps)
 	fmt.Println()
 }
 
+// GetApps ...
 func GetApps(appID string, client *onesignal.Client) {
 	fmt.Println("### GetApps ###")
 
 	app, res, err := client.Apps.Get(appID)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- app:%+v\n", app)
 	fmt.Println()
 }
 
+// CreateApps ...
 func CreateApps(client *onesignal.Client) string {
 	fmt.Println("### CreateApps ###")
 	app := &onesignal.AppRequest{
@@ -45,7 +48,7 @@ func CreateApps(client *onesignal.Client) string {
 	}
 	createRes, res, err := client.Apps.Create(app)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- createRes:%+v\n", createRes)
@@ -55,6 +58,7 @@ func CreateApps(client *onesignal.Client) string {
 	return createRes.ID
 }
 
+// UpdateApps ...
 func UpdateApps(appID string, client *onesignal.Client) {
 	fmt.Println("### UpdateApps ###")
 	app := &onesignal.AppRequest{
@@ -62,13 +66,14 @@ func UpdateApps(appID string, client *onesignal.Client) {
 	}
 	updateRes, res, err := client.Apps.Update(appID, app)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- updateRes:%+v\n", updateRes)
 	fmt.Println()
 }
 
+// ListPlayers ...
 func ListPlayers(client *onesignal.Client) {
 	fmt.Println("### ListPlayers ###")
 	listOpt := &onesignal.PlayerListOptions{
@@ -79,7 +84,7 @@ func ListPlayers(client *onesignal.Client) {
 
 	listRes, res, err := client.Players.List(listOpt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- listRes:%+v\n", listRes)
@@ -87,18 +92,20 @@ func ListPlayers(client *onesignal.Client) {
 	fmt.Println()
 }
 
+// GetPlayer ...
 func GetPlayer(playerID string, client *onesignal.Client) {
 	fmt.Println("### GetPlayer " + playerID + " ###")
 
 	player, res, err := client.Players.Get(playerID)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- player:%+v\n", player)
 	fmt.Println()
 }
 
+// CreatePlayer ...
 func CreatePlayer(client *onesignal.Client) (playerID string) {
 	fmt.Println("### CreatePlayer ###")
 	player := &onesignal.PlayerRequest{
@@ -126,7 +133,7 @@ func CreatePlayer(client *onesignal.Client) (playerID string) {
 	}
 	createRes, res, err := client.Players.Create(player)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- createRes:%+v\n", createRes)
@@ -136,6 +143,7 @@ func CreatePlayer(client *onesignal.Client) (playerID string) {
 	return createRes.ID
 }
 
+// OnSessionPlayer ...
 func OnSessionPlayer(playerID string, client *onesignal.Client) {
 	fmt.Println("### OnSessionPlayer " + playerID + " ###")
 	opt := &onesignal.PlayerOnSessionOptions{
@@ -154,13 +162,14 @@ func OnSessionPlayer(playerID string, client *onesignal.Client) {
 
 	onSessionRes, res, err := client.Players.OnSession(playerID, opt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- onSessionRes:%+v\n", onSessionRes)
 	fmt.Println()
 }
 
+// OnPurchasePlayer ...
 func OnPurchasePlayer(playerID string, client *onesignal.Client) {
 	fmt.Println("### OnPurchasePlayer " + playerID + " ###")
 	p1 := onesignal.Purchase{
@@ -180,13 +189,14 @@ func OnPurchasePlayer(playerID string, client *onesignal.Client) {
 
 	onPurchaseRes, res, err := client.Players.OnPurchase(playerID, opt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- onPurchaseRes:%+v\n", onPurchaseRes)
 	fmt.Println()
 }
 
+// OnFocusPlayer ...
 func OnFocusPlayer(playerID string, client *onesignal.Client) {
 	fmt.Println("### OnFocusPlayer " + playerID + " ###")
 	opt := &onesignal.PlayerOnFocusOptions{
@@ -196,13 +206,14 @@ func OnFocusPlayer(playerID string, client *onesignal.Client) {
 
 	onFocusRes, res, err := client.Players.OnFocus(playerID, opt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- onFocusRes:%+v\n", onFocusRes)
 	fmt.Println()
 }
 
+// CSVExportPlayer ...
 func CSVExportPlayer(client *onesignal.Client) {
 	fmt.Println("### CSVExportPlayer ###")
 	opt := &onesignal.PlayerCSVExportOptions{
@@ -211,13 +222,14 @@ func CSVExportPlayer(client *onesignal.Client) {
 
 	CSVEXportRes, res, err := client.Players.CSVExport(opt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- CSVEXportRes:%+v\n", CSVEXportRes)
 	fmt.Println()
 }
 
+// UpdatePlayer ...
 func UpdatePlayer(playerID string, client *onesignal.Client) {
 	fmt.Println("### UpdatePlayer " + playerID + " ###")
 	player := &onesignal.PlayerRequest{
@@ -226,13 +238,14 @@ func UpdatePlayer(playerID string, client *onesignal.Client) {
 
 	updateRes, res, err := client.Players.Update(playerID, player)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- updateRes:%+v\n", updateRes)
 	fmt.Println()
 }
 
+// ListNotifications ...
 func ListNotifications(client *onesignal.Client) []onesignal.Notification {
 	fmt.Println("### ListNotifications ###")
 	listOpt := &onesignal.NotificationListOptions{
@@ -243,7 +256,7 @@ func ListNotifications(client *onesignal.Client) []onesignal.Notification {
 
 	listRes, res, err := client.Notifications.List(listOpt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- listRes:%+v\n", listRes)
@@ -252,6 +265,7 @@ func ListNotifications(client *onesignal.Client) []onesignal.Notification {
 	return listRes.Notifications
 }
 
+// GetNotifications ...
 func GetNotifications(notificationID string, client *onesignal.Client) *onesignal.Notification {
 	fmt.Println("### GetNotifications " + notificationID + " ###")
 	opt := &onesignal.NotificationGetOptions{
@@ -260,7 +274,7 @@ func GetNotifications(notificationID string, client *onesignal.Client) *onesigna
 
 	getRes, res, err := client.Notifications.Get(notificationID, opt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- getRes:%+v\n", getRes)
@@ -268,16 +282,17 @@ func GetNotifications(notificationID string, client *onesignal.Client) *onesigna
 	return getRes
 }
 
+// CreateNotifications ...
 func CreateNotifications(client *onesignal.Client) string {
 	fmt.Println("### CreateNotifications ###")
 
 	notificationReq := &onesignal.NotificationRequest{
-		AppID: appID,
-		// Contents:         map[string]string{"en": "Test Message"},
-		// Headings:         map[string]string{"en": "Test Heading"},
-		// SubTitle:         map[string]string{"en": "Test SubTitle"},
-		IsIOS:            true,
-		ContentAvailable: true,
+		AppID:    appID,
+		Contents: map[string]string{"en": "Test Message"},
+		Headings: map[string]string{"en": "Test Heading"},
+		SubTitle: map[string]string{"en": "Test SubTitle"},
+		// IsIOS:            true,
+		// ContentAvailable: true,
 		Filters: []onesignal.Filter{
 			onesignal.Filter{
 				Field:    "tag",
@@ -285,12 +300,21 @@ func CreateNotifications(client *onesignal.Client) string {
 				Value:    "wyd1xwuaYezb0F4pvz5P4DgyZPwd6VGPP0P27qrFGiw=",
 				Relation: "=",
 			},
+			onesignal.Filter{
+				Operator: "OR",
+			},
+			onesignal.Filter{
+				Field:    "tag",
+				Key:      "email",
+				Value:    "jaLM9vD1CvPenenvw1Om5NKEfYmiSkPxsYdd0k+GDbQ=",
+				Relation: "=",
+			},
 		},
 	}
 
 	createRes, res, err := client.Notifications.Create(notificationReq)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- createRes:%+v\n", createRes)
@@ -299,6 +323,7 @@ func CreateNotifications(client *onesignal.Client) string {
 	return createRes.ID
 }
 
+// UpdateNotifications ...
 func UpdateNotifications(notificationID string, client *onesignal.Client) {
 	fmt.Println("### UpdateNotifications " + notificationID + " ###")
 	opt := &onesignal.NotificationUpdateOptions{
@@ -308,13 +333,14 @@ func UpdateNotifications(notificationID string, client *onesignal.Client) {
 
 	updateRes, res, err := client.Notifications.Update(notificationID, opt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- updateRes:%+v\n", updateRes)
 	fmt.Println()
 }
 
+// DeleteNotifications ...
 func DeleteNotifications(notificationID string, client *onesignal.Client) {
 	fmt.Println("### DeleteNotifications " + notificationID + " ###")
 	opt := &onesignal.NotificationDeleteOptions{
@@ -323,7 +349,7 @@ func DeleteNotifications(notificationID string, client *onesignal.Client) {
 
 	deleteRes, res, err := client.Notifications.Delete(notificationID, opt)
 	if err != nil {
-		fmt.Printf("--- res:%+v, err:%+v\n", res)
+		fmt.Printf("--- res:%+v, err:%+v\n", res, err)
 		log.Fatal(err)
 	}
 	fmt.Printf("--- deleteRes:%+v\n", deleteRes)
