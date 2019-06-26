@@ -91,6 +91,9 @@ type NotificationRequest struct {
 	AndroidGroupMessage interface{} `json:"android_group_message,omitempty"`
 	ADMGroup            string      `json:"adm_group,omitempty"`
 	ADMGroupMessage     interface{} `json:"adm_group_message,omitempty"`
+	ThreadID            string      `json:"thread_id,omitempty"`         // iOS 12+
+	SummaryArg          string      `json:"summary_arg,omitempty"`       // iOS 12+
+	SummaryArgCount     int         `json:"summary_arg_count,omitempty"` // iOS 12+
 
 	IsIOS       bool `json:"isIos,omitempty"`
 	IsAndroid   bool `json:"isAndroid,omitempty"`
